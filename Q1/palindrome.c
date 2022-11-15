@@ -67,7 +67,6 @@ void checkPalindromesInLine(char line[])
 {
     int i = strlen(line);
     int size = strlen(line);
-    int start = 0;
     int longestPalindrome = 0;
     
     if(size < 2)
@@ -78,7 +77,7 @@ void checkPalindromesInLine(char line[])
 
     for(; i > 0 ; i--)
     {
-        for(start = 0; start < size && i > 0 ; start++)
+        for(int start = 0; start < size ; start++)
         {
             int palindromeLength = getPalindromeLength(line, start, i);
 
