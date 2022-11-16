@@ -13,14 +13,14 @@
  *  IV = 4 , VI = 6 , XII = 12 , IX =9 , VIII = 8, MDCDLXXIV = 1974.
  * 
  * o programa foi compilado com a linha de comando
- *  gcc romanToDec.c -o romanToDec
+ *  gcc -g -o romanToDec romanToDec.c 
  * 
  * para usar invoque
  * ./romanToDec
  * 
  * Digite na entrada padrão o número romano para ser convertido em decimal
  * 
- * A saída será impressa na saída padrão
+ * A resposta será impressa na saída padrão
 */
 
 int get_decimal_value(char roman)

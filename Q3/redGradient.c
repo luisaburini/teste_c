@@ -28,12 +28,12 @@
  * output_esperado: 0x55001A\n 0xAA001A\n 0XFF001A\n
  * 
  * o programa foi compilado com a linha de comando
- *  gcc redGradient.c -o redGradient
+ *  gcc -g -o redGradient redGradient.c 
  * 
  * para usar invoque
  * ./redGradient cor_inicial cor_final nro_steps
  * 
- * A saída será impressa na saída padrão
+ * A resposta será impressa na saída padrão
 */
 
 #define RED     0XFF0000

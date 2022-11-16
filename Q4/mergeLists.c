@@ -23,14 +23,14 @@
  * struct ListaNode* mergeKListas(struct ListNode** listas, int listasSize){}
  * 
  * o programa foi compilado com a linha de comando
- *  gcc mergeLists.c -o mergeLists
+ *  gcc -g -o mergeLists mergeLists.c 
  * 
  * para usar invoque
  * ./mergeLists 
  * 
  * Digite na entrada padrão a lista desejada
  * 
- * A saída será impressa na saída padrão
+ * A resposta será impressa na saída padrão
 */
 
 struct ListNode 
@@ -42,7 +42,7 @@ struct ListNode
 #define MAX_LIST_LENGTH 256
 #define MAX_NUMBER_LENGTH 10
 
-void printList(struct ListNode* node)
+void print_list(struct ListNode* node)
 {
     printf("[");
     while(node != NULL)
@@ -57,11 +57,11 @@ void printList(struct ListNode* node)
         }
         node = node->next;
     }
-    printf("]");
+    printf("]\n");
 }
 
 	
-struct ListNode* sortedMerge(struct ListNode* a, struct ListNode* b)
+struct ListNode* sorted_merge(struct ListNode* a, struct ListNode* b)
 {
 	struct ListNode* result = NULL;
 
@@ -82,12 +82,12 @@ struct ListNode* sortedMerge(struct ListNode* a, struct ListNode* b)
 	if (a->data <= b->data) 
     {
 		result = a;
-		result->next = sortedMerge(a->next, b);
+		result->next = sorted_merge(a->next, b);
 	}
 	else 
     {
 		result = b;
-		result->next = sortedMerge(a, b->next);
+		result->next = sorted_merge(a, b->next);
 	}
 
 	return result;
@@ -103,7 +103,7 @@ struct ListNode* mergeKLists(struct ListNode** lists, int listSize)
 		
 		while (i < j) {
 			// merge List i with List j and store it in List i
-			lists[i] = sortedMerge(lists[i], lists[j]);
+			lists[i] = sorted_merge(lists[i], lists[j]);
 
 			// consider next pair
 			i++;
@@ -120,8 +120,7 @@ struct ListNode* mergeKLists(struct ListNode** lists, int listSize)
 	return lists[0];
 }
 
-// function to create a new node.
-struct ListNode* createNewNode(int data)
+struct ListNode* create_new_node(int data)
 {
 	struct ListNode* temp = (struct ListNode*)malloc(sizeof(struct ListNode));
 	temp->data = data;
@@ -129,11 +128,12 @@ struct ListNode* createNewNode(int data)
 	return temp;
 }
 
-void appendNewNodeToList(int newValue, struct ListNode** newList)
+
+void append_new_node_to_list(int newValue, struct ListNode** newList)
 {
     if(*newList == NULL)
     {
-        *newList = createNewNode(newValue);
+        *newList = create_new_node(newValue);
         return;
     }
     else
@@ -143,27 +143,27 @@ void appendNewNodeToList(int newValue, struct ListNode** newList)
         {
             lastNode = lastNode->next;
         }
-        lastNode->next = createNewNode(newValue);
+        lastNode->next = create_new_node(newValue);
     }
 
 }
 
-void appendNewListToUnmergedList(struct ListNode* newListHead, struct ListNode* unmergedList[], int k)
+void append_new_list_to_unmerged_list(struct ListNode* newListHead, struct ListNode* unmergedList[], int k)
 {   
     unmergedList[k]->data = newListHead->data;
     unmergedList[k]->next = newListHead->next;
 }
 
-void createListOfListNodes(struct ListNode* list[], int size)
+void create_list_of_list_nodes(struct ListNode* list[], int size)
 {
     for(int i=0; i<size; i++)
     {
         // create new dummy nodes
-        list[i] = createNewNode(0);
+        list[i] = create_new_node(0);
     }
 }
 
-void getListFromString(char strList[], struct ListNode* unmergedList[])
+void get_list_from_string(char strList[], struct ListNode* unmergedList[])
 {
     int listIndex = 0;
     int j = 0;
@@ -190,7 +190,7 @@ void getListFromString(char strList[], struct ListNode* unmergedList[])
                 }
                 number = atoi(numberStr);
 
-                appendNewNodeToList(number, &head);
+                append_new_node_to_list(number, &head);
                 
                 while(k < strlen(strList) && !isdigit(strList[k]) && strList[k] != ']')
                 {
@@ -200,14 +200,14 @@ void getListFromString(char strList[], struct ListNode* unmergedList[])
             }
 
             // new list ended, must append it to unmergedList
-            appendNewListToUnmergedList(head, unmergedList, listIndex);
+            append_new_list_to_unmerged_list(head, unmergedList, listIndex);
             i = j;
             listIndex++;
         }
     }
 }
 
-int getNumberOfLinkedLists(char strList[])
+int get_number_of_linked_lists(char strList[])
 {
     int k = 0;
     int size = strlen(strList);
@@ -230,17 +230,19 @@ int main()
     fgets(strList, MAX_LIST_LENGTH, stdin);
     
     //k is for Number of linked lists and n for Number of elements in each list
-	int k = getNumberOfLinkedLists(strList); 
+	int k = get_number_of_linked_lists(strList); 
     
     struct ListNode* unmergedLists[k];
-    createListOfListNodes(unmergedLists, k);
+    create_list_of_list_nodes(unmergedLists, k);
 
-    getListFromString(strList, unmergedLists);
+    get_list_from_string(strList, unmergedLists);
 
 	// Merge all lists
 	struct ListNode* head = mergeKLists(unmergedLists, k - 1);
 
-	printList(head);
+	print_list(head);
+
+    free(head);
 
 	return 0;
 }

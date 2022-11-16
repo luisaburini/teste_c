@@ -12,12 +12,12 @@
  * dentro de cada string e zero caso não encontre.
  * 
  * o programa foi compilado com a linha de comando
- *  gcc palindrome.c -o palindrome
+ *  gcc -g -o palindrome palindrome.c 
  * 
  * para usar invoque
  * ./palindrome nome-do-arquivo.txt
  * 
- * A saída será impressa 
+ * A resposta será impressa na saída padrão
 */
 
 #define MAX_LINE_LENGTH 256
