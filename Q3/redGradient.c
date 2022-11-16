@@ -39,31 +39,31 @@
 #define RED     0XFF0000
 
 
-__uint32_t convertStringToUint32(char str[])
+__uint32_t convert_string_to_uint32(char str[])
 {
-    __uint32_t convertedColor = strtoul(str, NULL, 16);
-    return convertedColor;
+    __uint32_t converted_color = strtoul(str, NULL, 16);
+    return converted_color;
 }
 
-int isolateRedFromColor(int color)
+int isolate_red_from_color(int color)
 {
     return color & RED;
 }
 
-void printRedGradient(char initialColor[], char finalColor[], int steps)
+void print_red_gradient(char initial_color[], char final_color[], int steps)
 {
-    __uint32_t initialColorCode = convertStringToUint32(initialColor);
-    __uint32_t initialRed = isolateRedFromColor(initialColorCode);
+    __uint32_t initial_color_code = convert_string_to_uint32(initial_color);
+    __uint32_t initial_red = isolate_red_from_color(initial_color_code);
 
-    __uint32_t finalColorCode = convertStringToUint32(finalColor);
-    __uint32_t finalRed = isolateRedFromColor(finalColorCode);
+    __uint32_t final_color_code = convert_string_to_uint32(final_color);
+    __uint32_t final_red = isolate_red_from_color(final_color_code);
 
-    __uint32_t increment = (finalRed - initialRed) / steps;
+    __uint32_t increment = (final_red - initial_red) / steps;
 
     for(int i=0; i<steps; i++)
     {
-        initialColorCode = initialColorCode + increment;
-        printf("Color[%d] = 0x%X\n", i, initialColorCode);
+        initial_color_code = initial_color_code + increment;
+        printf("Color[%d] = 0x%X\n", i, initial_color_code);
     }
 }
 
@@ -75,13 +75,13 @@ int main(int argc, char* argv[])
         exit(-1);
     }
 
-    char initialColor[10] = {0};
-    strcpy(initialColor, argv[1]);
+    char initial_color[10] = {0};
+    strcpy(initial_color, argv[1]);
 
-    char finalColor[10] = {0};
-    strcpy(finalColor, argv[2]);
+    char final_color[10] = {0};
+    strcpy(final_color, argv[2]);
 
     int steps = atoi(argv[3]);
     
-    printRedGradient(initialColor, finalColor, steps);
+    print_red_gradient(initial_color, final_color, steps);
 }

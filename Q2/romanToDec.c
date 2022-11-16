@@ -23,7 +23,7 @@
  * A saída será impressa na saída padrão
 */
 
-int getDecimalValue(char roman)
+int get_decimal_value(char roman)
 {
     int decimal = 0;
 
@@ -59,32 +59,32 @@ int getDecimalValue(char roman)
     return decimal;
 }
 
-int convertRomanToDecimal(char roman[])
+int convert_roman_to_decimal(char roman[])
 {
     int decimal = 0;
 
     for(int i=0; i<strlen(roman); i++)
     {
-        int currentDecimalValue = getDecimalValue(roman[i]);
+        int current_decimal_value = get_decimal_value(roman[i]);
 
         // make sure rightDecimalValue is within bounds
         if(i+1 < strlen(roman))
         {
-            int rightDecimalValue = getDecimalValue(roman[i+1]);
+            int right_decimal_value = get_decimal_value(roman[i+1]);
 
-            if(currentDecimalValue >= rightDecimalValue)
+            if(current_decimal_value >= right_decimal_value)
             {
-                decimal = decimal + currentDecimalValue;
+                decimal = decimal + current_decimal_value;
             }
             else
             {
-                decimal = decimal + rightDecimalValue - currentDecimalValue;
+                decimal = decimal + right_decimal_value - current_decimal_value;
                 i++;
             }
         }
         else
         {
-            decimal = decimal + currentDecimalValue;
+            decimal = decimal + current_decimal_value;
         }
     }
 
@@ -98,6 +98,6 @@ int main()
 
     scanf("%s", roman);
 
-    printf("\nDecimal: %d\n", convertRomanToDecimal(roman));
+    printf("Decimal: %d\n", convert_roman_to_decimal(roman));
 
 }

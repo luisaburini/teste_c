@@ -22,7 +22,7 @@
 
 #define MAX_LINE_LENGTH 256
 
-void revertString(char str[], char reverse[], int size)
+void revert_string(char str[], char reverse[], int size)
 {
     for(int i=0; i < size; i++)
     {
@@ -34,7 +34,7 @@ void revertString(char str[], char reverse[], int size)
  * Get Palindrome Length
  *  returns the string length if palindrome, otherwise 0
 */
-int getPalindromeLength(char* str, int start, int size)
+int get_palindrome_length(char* str, int start, int size)
 {
     char* string = malloc(strlen(str) - start);
     memset(string, 0x00, size);
@@ -47,7 +47,7 @@ int getPalindromeLength(char* str, int start, int size)
     // must return 0
     __uint8_t sizeToReturn = 0;
     
-    revertString(string, stringReverse, size);
+    revert_string(string, stringReverse, size);
     
     if(strcmp(string, stringReverse) == 0)
     {
@@ -63,11 +63,11 @@ int getPalindromeLength(char* str, int start, int size)
 /**
  * Search for palindromes in the line
 */
-void checkPalindromesInLine(char line[])
+void check_palindromes_in_line(char line[])
 {
     int i = strlen(line);
     int size = strlen(line);
-    int longestPalindrome = 0;
+    int longest_palindrome = 0;
     
     if(size < 2)
     {
@@ -79,16 +79,16 @@ void checkPalindromesInLine(char line[])
     {
         for(int start = 0; start < size ; start++)
         {
-            int palindromeLength = getPalindromeLength(line, start, i);
+            int palindrome_length = get_palindrome_length(line, start, i);
 
-            if(palindromeLength > longestPalindrome)
+            if(palindrome_length > longest_palindrome)
             {
-                longestPalindrome = palindromeLength;
+                longest_palindrome = palindrome_length;
             }
         }
     }
 
-    printf("Longest Palindrome: %d\n", longestPalindrome);
+    printf("Longest Palindrome: %d\n", longest_palindrome);
 
 }
 
@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
 
     while(fgets(line, sizeof(line), file))
     {
-        checkPalindromesInLine(line);
+        check_palindromes_in_line(line);
     }
 
     fclose(file);
