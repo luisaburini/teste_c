@@ -224,6 +224,14 @@ int get_number_of_linked_lists(char strList[])
     return k-1;
 }
 
+void freeAll(struct ListNode** list, int size)
+{
+    for(int i=0; i<size; i++)
+    {
+        free(list[i]);
+    }
+}
+
 int main()
 {
     char strList[MAX_LIST_LENGTH] = {0};
@@ -242,7 +250,7 @@ int main()
 
 	print_list(head);
 
-    free(head);
+    freeAll(unmergedLists, k);
 
 	return 0;
 }
